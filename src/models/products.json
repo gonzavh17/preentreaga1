@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Nuevo Producto",
+    "description": "Descripción del nuevo producto",
+    "price": 19.99,
+    "category": "Electronics",
+    "code": "ABC123",
+    "stock": 10,
+    "id": "fad2c574-13e8-432e-bfe4-2598686247a1",
+    "status": true
+  }
+]
