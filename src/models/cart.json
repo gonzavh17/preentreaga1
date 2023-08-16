@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "edfcf1b1-98bc-44ed-b962-9d8dbf4c3803",
+    "products": [
+      {
+        "product": "96f3f3c8-d7fa-4f32-b91b-b2e268256167",
+        "quantity": 1
+      }
+    ]
+  }
+]

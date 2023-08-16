@@ -46,38 +46,43 @@ export class ProductManager {
     }
   }
 
-  async updateProduct(id, { title, description, price, thumbnail, code, stock }) {
-    this.loadProducts()
-    const index = this.products.findIndex((prod) => prod.id === id);
+  async updateProduct(
+    id,
+    { title, description, price, thumbnail, code, stock }
+  ) {
+    const products = JSON.parse(await fs.readFile(this.path, "utf-8"));
+    const index = products.findIndex((prod) => prod.id === id);
 
-    if (index !== -1) {
-      this.products[index].title = title;
-      this.products[index].description = description;
-      this.products[index].price = price;
-      this.products[index].thumbnail = thumbnail;
-      this.products[index].code = code;
-      this.products[index].stock = stock;
+    if (index != -1) {
+      products[index].title = title;
+      products[index].description = description;
+      products[index].price = price;
+      products[index].thumbnail = thumbnail;
+      products[index].code = code;
+      products[index].stock = stock;
 
       console.log("Producto modificado exitosamente");
 
-      this.saveProducts()
+      await fs.writeFile(this.path, JSON.stringify(products));
     } else {
       console.log("Producto no encontrado");
     }
   }
 
+
   async deleteProduct(id) {
     this.loadProducts()
 
-    const searchedProduct = this.products.find((prod) => prod.id === id);
+    const initialProductCount = this.products.length;
+    this.products = this.products.filter(p => p.id !== id);
 
-    if (!searchedProduct) {
-      return console.log("Producto no encontrado");
+    if (this.products.length === initialProductCount) {
+      console.error('Producto no encontrado.');
+    } else {
+      await this.saveProducts();
+      console.log('Producto eliminado correctamente.');
     }
 
-    console.log("Producto eliminado exitosamente");
-
-    const prods = this.products.filter((prod) => prod.id !== id);
 
    this.saveProducts
   }

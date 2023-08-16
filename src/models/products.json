@@ -1,12 +1,22 @@
 [
   {
-    "title": "Nuevo Producto",
-    "description": "Descripción del nuevo producto",
-    "price": 19.99,
-    "category": "Electronics",
-    "code": "ABC123",
-    "stock": 10,
-    "id": "fad2c574-13e8-432e-bfe4-2598686247a1",
+    "title": "producto4",
+    "description": "Descripción del nuevo producto4",
+    "price": 40.99,
+    "category": "Samsungf",
+    "code": "ssca1893",
+    "stock": 23,
+    "id": "96f3f3c8-d7fa-4f32-b91b-b2e268256167",
+    "status": true
+  },
+  {
+    "title": "producto4",
+    "description": "Descripción del nuevo producto4",
+    "price": 40.99,
+    "category": "Apple",
+    "code": "ssca1893",
+    "stock": 23,
+    "id": "515e0cef-6aac-4a50-9f6f-3f0e2186557b",
     "status": true
   }
 ]
