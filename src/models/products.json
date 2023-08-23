@@ -1,22 +1,22 @@
 [
   {
-    "title": "producto4",
-    "description": "Descripción del nuevo producto4",
-    "price": 40.99,
-    "category": "Samsungf",
-    "code": "ssca1893",
-    "stock": 23,
-    "id": "96f3f3c8-d7fa-4f32-b91b-b2e268256167",
-    "status": true
+    "title": "televisor samsung",
+    "description": "televisor samsung 55' oled",
+    "category": "tecnologia",
+    "price": "399999",
+    "stock": "32",
+    "code": "ABC12678",
+    "status": true,
+    "id": "5790f173-4f0b-44ff-994e-2581785a5b25"
   },
   {
-    "title": "producto4",
-    "description": "Descripción del nuevo producto4",
-    "price": 40.99,
-    "category": "Apple",
-    "code": "ssca1893",
-    "stock": 23,
-    "id": "515e0cef-6aac-4a50-9f6f-3f0e2186557b",
-    "status": true
+    "title": "samsung galaxy s23",
+    "description": "samsung galaxy s23 ",
+    "category": "celular",
+    "price": "259999",
+    "stock": "34",
+    "code": "adf1234",
+    "status": true,
+    "id": "e5671682-a4ef-4795-a502-a3336f842feb"
   }
 ]
