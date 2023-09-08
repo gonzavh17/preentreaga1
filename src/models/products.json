@@ -1,22 +1,12 @@
 [
   {
-    "title": "televisor samsung",
-    "description": "televisor samsung 55' oled",
-    "category": "tecnologia",
-    "price": "399999",
-    "stock": "32",
-    "code": "ABC12678",
+    "title": "asd",
+    "description": "asd",
+    "category": "asd",
+    "price": "asd",
+    "stock": "13",
+    "code": "1231234",
     "status": true,
-    "id": "5790f173-4f0b-44ff-994e-2581785a5b25"
-  },
-  {
-    "title": "samsung galaxy s23",
-    "description": "samsung galaxy s23 ",
-    "category": "celular",
-    "price": "259999",
-    "stock": "34",
-    "code": "adf1234",
-    "status": true,
-    "id": "e5671682-a4ef-4795-a502-a3336f842feb"
+    "id": "7b9cf556-2836-4d11-9688-3828a9e57463"
   }
 ]

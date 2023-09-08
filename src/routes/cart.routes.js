@@ -1,6 +1,84 @@
 import { Router } from "express";
 import { CartManager } from "../controllers/cartManager.js";
+import cartModel from "../models/cart.model.js";
 
+const cartRouter = Router()
+
+cartRouter.get('/', async(req, res) => {
+  const {limit} = req.query
+
+  try {
+    const carts = await productModel.find().limit(limit)
+    res.status(200).send({resultado: "OK", message: carts})
+  } catch(error) {
+    res.status(400).send({error: `Error al consultar carrito ${error}`})
+  }
+})
+
+cartRouter.get("/:cid", async (req, res) => {
+  const {cid} = req.params
+
+  try{
+    const cart = await cartModel.findById(cid)
+    if(cart) res.status(200).send({resultado: "OK", message: cart})
+    else res.status(404).send({resultado: "Not Found", message: cart})
+  } catch(error) {
+    res.status(400).send({ error: `Error al consultar productos ${error}` });
+  }
+})
+
+// CREAR NUEVO CARRITO
+
+
+cartRouter.post("/", async(req, res) => {
+  const{id_prod, quantity} = req.body
+
+  try{
+    const respuesta = await cartModel.create({
+      id_prod,
+      quantity
+    })
+    res.status(200).send({ resultado: 'OK', message: respuesta });
+  } catch(error){
+    res.status(400).send({ error: `Error al consultar productos ${error}` });
+  }
+})
+
+cartRouter.put("/:cid", async(req, res) => {
+  const {cid} = req.params
+  const {id_prod, quantity} = req.body
+
+  try{
+    const cart = await cartModel.findByIdAndUpdate(cid, {
+      id_prod,
+      quantity
+    })
+    if(cart) res.status(200).send({resultado: "OK", message: cart})
+    else res.status(404).send({resultado:'Not Found', message: cart})
+  } catch (error) {
+    res.status(400).send({ error: `Error al consultar productos ${error}` });
+  }
+})
+
+cartRouter.delete("/:cid", async(req, res) => {
+  const { cid } = req.params;
+
+  try{
+    const cart = await cartModel.findByIdAndDelete(cid)
+    if(cart) res.status(200).send({resultado: "OK", message: cart})
+    else res.status(400).send({resultado:"Not Found", message: cart})
+  } catch(error) {
+    res.status(400).send ({ error:`Error al eliminar carritos: ${error}`});
+  }
+})
+
+
+export default cartRouter;
+
+
+
+// CART ROUTES CON CART MANAGER
+/* 
 const cartManager = new CartManager(
   "src/models/cart.json",
   "src/models/products.json"
@@ -42,6 +120,4 @@ routerCart.delete("/:cid", async (req, res) => {
   if (succesfullDelete)
     res.status(200).send("Producto eliminado del carrito correctamente");
   else res.status(404).send("Producto del carrito no hallado");
-});
-
-export default routerCart;
+}); */
