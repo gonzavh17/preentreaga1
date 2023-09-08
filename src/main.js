@@ -68,6 +68,13 @@ app.get('/static/realtimeproducts', (req, res) => {
     })
 })
 
+app.get('/static/chat', (req, res) => {
+    res.render('chat', {
+        rutaCSS:'chat',
+        rutaJS:"chat"
+    })
+})
+
 
 //Rutas de productos
 app.use('/api/products', productRouter);
