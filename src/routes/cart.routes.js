@@ -54,9 +54,9 @@ cartRouter.post('/:cid/products/:pid', async (req, res) => {
     const searchCart = await cartModel.findById(cid)
 
     if (searchCart) {
-      foundCart.products.push({ id_prod: pid, quantity: quantity })
+      searchCart.products.push({ id_prod: pid, quantity: quantity })
 
-      const updatedCart = await foundCart.save()
+      const updatedCart = await searchCart.save()
 
       res.status(200).send({ result: 'OK', message: 'Producto agregado exitosamente', cart: updatedCart })
     } else {
