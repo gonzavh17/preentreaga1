@@ -44,6 +44,32 @@ cartRouter.post("/", async(req, res) => {
   }
 })
 
+
+// Agregar producto al carrito
+cartRouter.post('/:cid/products/:pid', async (req, res) => {
+  const { cid, pid } = req.params
+  const { quantity } = req.body
+
+  try {
+    const searchCart = await cartModel.findById(cid)
+
+    if (searchCart) {
+      foundCart.products.push({ id_prod: pid, quantity: quantity })
+
+      const updatedCart = await foundCart.save()
+
+      res.status(200).send({ result: 'OK', message: 'Producto agregado exitosamente', cart: updatedCart })
+    } else {
+      res.status(404).send({ error: 'Carrito no encontrado' })
+    }
+  }
+
+  catch (error) {
+    res.status(400).send({ error: `Error al añadir producto: ${error}` })
+  }
+})
+
+// Update a Cart
 cartRouter.put("/:cid", async(req, res) => {
   const {cid} = req.params
   const {id_prod, quantity} = req.body
@@ -60,6 +86,8 @@ cartRouter.put("/:cid", async(req, res) => {
   }
 })
 
+
+
 cartRouter.delete("/:cid", async(req, res) => {
   const { cid } = req.params;
 
@@ -71,6 +99,8 @@ cartRouter.delete("/:cid", async(req, res) => {
     res.status(400).send ({ error:`Error al eliminar carritos: ${error}`});
   }
 })
+
+
 
 
 export default cartRouter;
