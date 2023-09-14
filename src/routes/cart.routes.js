@@ -150,49 +150,38 @@ cartRouter.delete("/:cid", async (req, res) => {
   }
 });
 
-export default cartRouter;
+cartRouter.delete("/:cid/products/:pid", async (req, res) => {
+  const { cid, pid } = req.params;
 
-// CART ROUTES CON CART MANAGER
-/* 
-const cartManager = new CartManager(
-  "src/models/cart.json",
-  "src/models/products.json"
-);
+  try {
+    const searchCart = await cartModel.findById(cid);
 
-const routerCart = Router();
+    if (searchCart) {
+      const existingProductIndex = searchCart.products.findIndex(
+        (product) => product.id_prod.toString() === pid
+      );
+      let deleteProduct
 
-routerCart.post("/", async (req, res) => {
-  if (cartManager.getCarts().length > 0) {
-    const newProduct = req.body;
-    await productManager.addProduct(newProduct);
-    res.status(201).send("Producto creado exitosamente");
-  } else {
-    res.status(400).send("Carrito ya creado");
+      if (existingProductIndex !== -1) {
+       deleteProduct = cart.products[productIndex]
+       cart.products.splice(productIndex, 1)
+      } else {
+        res.status(404).send({resultado: "Producto no hallado", message: searchCart})
+      }
+
+      await searchCart.save();
+
+      res.status(200).send({
+        result: "OK",
+        message: "Producto agregado exitosamente",
+        cart: updatedCart,
+      });
+    } else {
+      res.status(404).send({ error: "Carrito no encontrado" });
+    }
+  } catch (error) {
+    res.status(400).send({ error: `Error al añadir producto: ${error}` });
   }
 });
 
-routerCart.get("/:cid", async (req, res) => {
-  const { cid } = req.params;
-  const cart = await cartManager.getCartsByID(cid);
-
-  if (cart) res.status(200).send(cart);
-  else res.status(404).send("Carrito no encontrado");
-});
-
-routerCart.post("/:cid/product/:pid", async (req, res) => {
-  const { cid, pid } = req.params;
-  const { quantity } = req.body;
-
-  const succesPost = await cartManager.addProductToCart(cid, pid, quantity);
-  if (succesPost) res.status(201).send("Producto agregado correctamente");
-  else res.status(404).send("Carrito no encontrado");
-});
-
-routerCart.delete("/:cid", async (req, res) => {
-  const cartID = req.params.cid;
-  const succesfullDelete = await cartManager.deleteCart(cartID);
-
-  if (succesfullDelete)
-    res.status(200).send("Producto eliminado del carrito correctamente");
-  else res.status(404).send("Producto del carrito no hallado");
-}); */
+export default cartRouter;

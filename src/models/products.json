@@ -8,5 +8,13 @@
     "code": "asd",
     "status": true,
     "id": "541f8ef2-ff80-4b9f-93c1-7ab354fc087d"
+  },
+  {
+    "title": "Razer Blade 17",
+    "description": "Razer Blade 17, rtx 3070ti",
+    "category": "Gamer Laptop",
+    "price": "3500",
+    "stock": "15",
+    "code": "RAZER9432"
   }
 ]
