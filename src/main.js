@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import { engine } from "express-handlebars";
 import { __dirname } from "./path.js";
@@ -23,9 +24,7 @@ const io = new Server(server);
 
 //Moongose
 mongoose
-  .connect(
-    "mongodb+srv://keyapi22:coderhouse@cluster0.hkittje.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URL)
   .then(async () => {
     console.log("BDD conectada");
   })
@@ -65,11 +64,11 @@ app.get("/static", (req, res) => {
 });
 
 app.get("/static/products", (req, res) => {
-    res.render("products", {
-      rutaCSS: "products",
-      rutaJS: "products",
-    });
+  res.render("products", {
+    rutaCSS: "products",
+    rutaJS: "products",
   });
+});
 
 app.get("/static/realtimeproducts", (req, res) => {
   res.render("realTimeProducts", {
