@@ -160,28 +160,27 @@ cartRouter.delete("/:cid/products/:pid", async (req, res) => {
       const existingProductIndex = searchCart.products.findIndex(
         (product) => product.id_prod.toString() === pid
       );
-      let deleteProduct
 
       if (existingProductIndex !== -1) {
-       deleteProduct = cart.products[productIndex]
-       cart.products.splice(productIndex, 1)
+        searchCart.products.splice(existingProductIndex, 1);
+        await searchCart.save();
+
+        res.status(200).send({
+          result: "OK",
+          message: "Producto eliminado exitosamente",
+          cart: searchCart,
+        });
       } else {
-        res.status(404).send({resultado: "Producto no hallado", message: searchCart})
+        res.status(404).send({
+          resultado: "Producto no hallado",
+          message: searchCart,
+        });
       }
-
-      await searchCart.save();
-
-      res.status(200).send({
-        result: "OK",
-        message: "Producto agregado exitosamente",
-        cart: updatedCart,
-      });
     } else {
       res.status(404).send({ error: "Carrito no encontrado" });
     }
   } catch (error) {
-    res.status(400).send({ error: `Error al añadir producto: ${error}` });
+    res.status(400).send({ error: `Error al eliminar producto: ${error}` });
   }
 });
-
 export default cartRouter;
