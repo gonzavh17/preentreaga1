@@ -1,31 +1,34 @@
-import { showErrorMessage, showSuccessMessage } from "./swalfire.js";
+const form = document.getElementById("formLogin");
 
-const socket = io();
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-const form = document.getElementById('formRegister');
+  const dataForm = new FormData(form);
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  const obj = {};
 
-    const dataForm = new FormData(form);
+  dataForm.forEach((value, key) => (obj[key] = value));
+  fetch("/api/sessions/login", {
+    method: "POST",
+    body: JSON.stringify(obj),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((result) => result.json())
+    .then((response) => {
+      console.log("Server Response:", response);
 
-    const obj = {};
-    dataForm.forEach((value, key) => obj[key] = value);
-    fetch('/api/sessions/register', {
-        method: 'POST',
-        body: JSON.stringify(obj),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(result => {
-        if (result.status === 200) {
-            showSuccessMessage('Usuario creado', "Iniciar Sesion")
-                .then(() => {
-                    window.location.replace('/static/login');
-                });
-        } else {
-            showErrorMessage('Error al crear usuario');
-        }
+      if (response.payload && response.payload._id) {
+        alert("Logueo exitoso")
+        window.location.replace("/static/home");
+        // });
+      } else {
+        alert("Logueo fallido")
+      }
     })
-    e.target.reset();
-})
+    .catch((error) => {
+      console.error("Fetch Error:", error);
+     
+    });
+});

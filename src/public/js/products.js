@@ -1,8 +1,7 @@
-import { showSuccessMessage, showErrorMessage } from "./swalfire.js";
 
 const form = document.getElementById("formLogin");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const dataForm = new FormData(form);
@@ -10,27 +9,26 @@ form.addEventListener("submit", (e) => {
   const obj = {};
 
   dataForm.forEach((value, key) => (obj[key] = value));
-  fetch("/api/sessions/login", {
-    method: "POST",
-    body: JSON.stringify(obj),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((result) => result.json())
-    .then((response) => {
-      console.log("Server Response:", response);
-
-      if (response.payload && response.payload._id) {
-        showSuccessMessage("Login successful", "Acceder").then(() => {
-          window.location.replace("/static/home");
-        });
-      } else {
-        showErrorMessage("Login failed");
-      }
-    })
-    .catch((error) => {
-      console.error("Fetch Error:", error);
-      showErrorMessage("An error occurred while logging in.");
+  try {
+    const response = await fetch("/api/sessions/login", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+    const data = await response.json();
+
+    console.log("Server Response:", data);
+
+    if (data.payload && data.payload._id) {
+      alert("Loguing exitoso")
+      window.location.replace("/static/home");
+    } else {
+      alert("Error en el logueo")
+    }
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    alert("error en el logueo")
+  }
 });

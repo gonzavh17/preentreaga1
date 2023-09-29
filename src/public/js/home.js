@@ -1,5 +1,3 @@
-import { showSuccessMessage, showErrorMessage } from './swalfire.js';
-
 const socket = io();
 
 socket.emit('getProducts');
@@ -30,12 +28,10 @@ logoutBtn.addEventListener('click', () => {
                 'Content-Type': 'application/json'
             }
         })
-        showSuccessMessage('Has cerrado sesion')
-            .then(() => {
-                window.location.replace('/static/login');
-            });
+        .then(() => {
+            window.location.replace('/static/login');
+        });
     } catch (error) {
-        showErrorMessage('Error al cerrar sesion');
         console.log(error);
     }
 });

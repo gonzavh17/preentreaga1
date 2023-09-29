@@ -1,5 +1,3 @@
-import { showSuccessMessage, showErrorMessage } from "./swalfire.js";
-
 const form = document.getElementById("formLogin");
 
 form.addEventListener("submit", (e) => {
@@ -21,15 +19,13 @@ form.addEventListener("submit", (e) => {
     .then((response) => {
       console.log("Server Response:", response);
       if (response.payload && response.payload._id) {
-        showSuccessMessage("Login successful", "Acceder").then(() => {
-          window.location.replace("/static/home");
-        });
+        window.location.replace("/static/home");
       } else {
-        showErrorMessage("Login failed");
+        console.error("Login failed");
       }
     })
     .catch((error) => {
       console.error("Fetch Error:", error);
-      showErrorMessage("An error occurred while logging in.");
+
     });
 });
