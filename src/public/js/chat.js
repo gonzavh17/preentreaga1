@@ -1,37 +1,75 @@
 const socket = io();
 
-const chatBtn = document.querySelector('#chat-btn');
-const messagesDIv = document.querySelector('#message-div');
-const chatDiv = document.querySelector('#chat-div');
+const messageContainer = document.getElementById("chatAllMessages");
+const messageBox = document.getElementById("chatBox");
+const sendButton = document.getElementById("chatBtn");
 
 let email;
-
 Swal.fire({
-	title: 'Identificación de usuario',
-	text: 'Por favor ingrese su email',
-	input: 'text',
+  title: "Identificación de usuario",
+  text: "Por favor ingrese su email",
+  input: "text",
 
-	inputValidator: valor => {
-		return !valor && 'Ingrese un email válido';
-	},
-}).then(resultado => {
-	email = resultado.value;
+  inputValidator: (valor) => {
+    return !valor && "Ingrese un email válido";
+  },
+  allowOutsideClick: false,
+}).then((resultado) => {
+  socket.emit("getMessages");
+  email = resultado.value;
 });
 
-chatBtn.addEventListener('click', () => {
-	if (chatDiv.value.trim().length > 0) {
-		socket.emit('mensaje', {
-			email: email,
-			message: chatDiv.value,
-		});
-		chatDiv.value = '';
-	}
+sendButton.addEventListener("click", () => {
+  if (messageBox.value.trim().length > 0) {
+    socket.emit("mensaje", {
+      email: email,
+      message: messageBox.value,
+    });
+    messageBox.value = "";
+  }
 });
 
-socket.on('mensajes', arrayMensajes => {
-	messagesDIv.innerHTML = '';
-	arrayMensajes.forEach(msj => {
-		const { email, message } = msj;
-		messagesDIv.innerHTML += `<p>${email} escribió: </p> <p>${message}</p>`;
-	});
+const sendMessage = () => {
+  if (messageBox.value.trim().length > 0) {
+    socket.emit("mensaje", {
+      email: email,
+      message: messageBox.value,
+    });
+    messageBox.value = "";
+  }
+};
+
+messageBox.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    sendMessage();
+  }
+});
+
+socket.on("all-messages", (data) => {
+  data.forEach((message) => {
+    const newMessage = document.createElement("div");
+    newMessage.classList.add("message");
+    newMessage.innerHTML = `
+                                <div class="message">
+                                <span class="user">${message.email}</span>
+                                <span class="text">${message.message}</span>
+                                </div>
+                                `;
+    messageContainer.appendChild(newMessage);
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  });
+});
+
+socket.on("mensajes", (data) => {
+  const newMessage = document.createElement("div");
+  newMessage.classList.add("message");
+  newMessage.innerHTML = `
+                            <div class="message">
+                            <span class="user">${data.email}</span>
+                            <span class="text">${data.message}</span>
+                            </div>
+                            `;
+  messageContainer.appendChild(newMessage);
+  messageContainer.scrollTop = messageContainer.scrollHeight;
 });

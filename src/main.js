@@ -8,7 +8,14 @@ import { ProductManager } from "./controllers/productManager.js";
 import productRouter from "./routes/product.routes.js";
 import mongoose from "mongoose";
 import cartRouter from "./routes/cart.routes.js";
+import MongoStore from "connect-mongo";
 import messageRouter from "./routes/messages.routes.js";
+import session from 'express-session'
+import cookieParser from "cookie-parser";
+import routerSession from "./routes/sessions.routes.js";
+import passport from 'passport';
+import initializePassport from './config/passport.js';
+import routerHbs from "./routes/handlebars.routes.js";
 
 const productManager = new ProductManager("src/models/products.json");
 
@@ -35,10 +42,34 @@ mongoose
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.SIGNED_COOKIE));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", path.resolve(__dirname, "./views"));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URL,
+      mongoOptions: {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+      },
+      ttl: 600 
+  }),
+}));
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
+
+app.get('/sessions', (req, res) => {
+  if(req.session.counter) {
+    req.session.counter
+    res.send(`has entrado ${req.session.counter} veces`)
+  } else{
+    req.session.counter = 1
+  }
+})
 //Conexion socket.io
 
 io.on("connection", (socket) => {
@@ -56,40 +87,18 @@ io.on("connection", (socket) => {
   });
 });
 
-app.get("/static", (req, res) => {
-  res.render("home", {
-    rutaCSS: "index",
-    rutaJS: "index",
-  });
-});
+app.use("/static", express.static(path.join(__dirname, "/public")));
+app.use('/static', routerHbs);
 
-app.get("/static/products", (req, res) => {
-  res.render("products", {
-    rutaCSS: "products",
-    rutaJS: "products",
-  });
-});
 
-app.get("/static/realtimeproducts", (req, res) => {
-  res.render("realTimeProducts", {
-    rutaCSS: "realTimeProducts",
-    rutaJS: "realTimeProducts",
-  });
-});
-
-app.get("/static/chat", (req, res) => {
-  res.render("chat", {
-    rutaCSS: "chat",
-    rutaJS: "chat",
-  });
-});
 
 //Rutas de productos
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/message", messageRouter);
+app.use("/api/sessions", routerSession)
 
-app.use("/static", express.static(path.join(__dirname, "/public")));
+
 app.get("*", (req, res) => {
   res.status(404).send("Error 404");
 });
