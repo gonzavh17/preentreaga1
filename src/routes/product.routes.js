@@ -1,5 +1,6 @@
 import { Router } from "express";
 import productModel from "../models/products.model.js";
+import { passportError, authorization } from "../utils/messageErrors.js";
 
 const productRouter = Router();
 
@@ -39,7 +40,7 @@ productRouter.get("/:pid", async (req, res) => {
   }
 });
 
-productRouter.post("/", async (req, res) => {
+productRouter.post("/", passportError('jwt'), authorization('Admin'), async (req, res) => {
   const { title, description, stock, code, price, category } = req.body;
 
   try {

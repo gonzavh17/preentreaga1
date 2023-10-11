@@ -16,6 +16,8 @@ import routerSession from "./routes/sessions.routes.js";
 import passport from 'passport';
 import initializePassport from './config/passport.js';
 import routerHbs from "./routes/handlebars.routes.js";
+import router from "./routes/index.routes.js";
+import routerUser from "./routes/users.routes.js";
 
 const productManager = new ProductManager("src/models/products.json");
 
@@ -42,7 +44,7 @@ mongoose
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser(process.env.SIGNED_COOKIE));
+app.use(cookieParser(process.env.JWT_SECRET));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", path.resolve(__dirname, "./views"));
@@ -91,12 +93,15 @@ app.use("/static", express.static(path.join(__dirname, "/public")));
 app.use('/static', routerHbs);
 
 
+/* app.use('/', router) */
+
 
 //Rutas de productos
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/sessions", routerSession)
+app.use("/api/user", routerUser)
 
 
 app.get("*", (req, res) => {
