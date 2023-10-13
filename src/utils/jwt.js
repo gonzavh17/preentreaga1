@@ -14,7 +14,6 @@ export const generateToken = (user) => {
     first_name: "Pedro",
     last_name: "Perez",
     email: "pedro@pedro.com",
-    password: "$2b$15$Lb4LZguYI3NnDmxUB.YtxOevb6yml1OrfBqwDSly4XVU42tP9vSPi",
     rol: "Admin",
     age: { $numberInt: "21" },
   })
