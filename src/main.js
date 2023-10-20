@@ -4,7 +4,6 @@ import { engine } from "express-handlebars";
 import { __dirname } from "./path.js";
 import { Server } from "socket.io";
 import path from "path";
-import { ProductManager } from "./controllers/productManager.js";
 import productRouter from "./routes/product.routes.js";
 import mongoose from "mongoose";
 import cartRouter from "./routes/cart.routes.js";
@@ -19,7 +18,6 @@ import routerHbs from "./routes/handlebars.routes.js";
 import router from "./routes/index.routes.js";
 import routerUser from "./routes/users.routes.js";
 
-const productManager = new ProductManager("src/models/products.json");
 
 const PORT = 8080;
 const app = express();
