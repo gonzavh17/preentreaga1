@@ -77,8 +77,6 @@ io.on("connection", (socket) => {
 app.use("/static", express.static(path.join(__dirname, "/public")));
 app.use('/static', routerHbs);
 
-
-
 app.use('/', router)
 
 app.get("*", (req, res) => {
