@@ -5,6 +5,7 @@ const cartRouter = Router();
 
 cartRouter.get("/", cartsController.getCarts);
 cartRouter.get("/:cid", cartsController.getCart);
+cartRouter.post('/:cid/purchase', cartsController.purchaseCart)
 cartRouter.post("/", cartsController.postCart);
 cartRouter.post("/:cid/products/:pid", cartsController.postProductIntoCart);
 cartRouter.put("/:cid", cartsController.putProductsToCart);

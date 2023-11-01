@@ -4,19 +4,15 @@ import { engine } from "express-handlebars";
 import { __dirname } from "./path.js";
 import { Server } from "socket.io";
 import path from "path";
-import productRouter from "./routes/product.routes.js";
 import mongoose from "mongoose";
-import cartRouter from "./routes/cart.routes.js";
 import MongoStore from "connect-mongo";
-import messageRouter from "./routes/messages.routes.js";
 import session from 'express-session'
 import cookieParser from "cookie-parser";
-import routerSession from "./routes/sessions.routes.js";
 import passport from 'passport';
 import initializePassport from './config/passport.js';
 import routerHbs from "./routes/handlebars.routes.js";
 import router from "./routes/index.routes.js";
-import routerUser from "./routes/users.routes.js";
+import routerMailing from "./routes/mail.routes.js";
 
 
 const PORT = 8080;
@@ -61,15 +57,6 @@ initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
 
-
-app.get('/sessions', (req, res) => {
-  if(req.session.counter) {
-    req.session.counter
-    res.send(`has entrado ${req.session.counter} veces`)
-  } else{
-    req.session.counter = 1
-  }
-})
 //Conexion socket.io
 
 io.on("connection", (socket) => {
@@ -92,16 +79,7 @@ app.use('/static', routerHbs);
 
 
 
-/* app.use('/', router) */
-
-
-//Rutas de productos
-app.use("/api/products", productRouter);
-app.use("/api/carts", cartRouter);
-app.use("/api/message", messageRouter);
-app.use("/api/sessions", routerSession)
-app.use("/api/user", routerUser)
-
+app.use('/', router)
 
 app.get("*", (req, res) => {
   res.status(404).send("Error 404");
