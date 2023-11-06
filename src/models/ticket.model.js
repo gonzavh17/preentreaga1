@@ -1,16 +1,10 @@
 import { Schema, model } from "mongoose";
-import mongoose from "mongoose";
 
 const ticketSchema = new Schema({
   code: {
     type: String,
     required: true,
-  },
-/*  _ticketId: {
-    type: Schema.Types.ObjectId,
-    ref: 'tickets',
-    required: true
-  }, */ 
+  }, 
   amount: {
     type: Number,
     required: true,
