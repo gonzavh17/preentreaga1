@@ -10,8 +10,8 @@ const ticketSchema = new Schema({
     required: true,
   },
   purchaser: {
-    type: String,
-    required: true,
+  type: String,
+  required: true,
   },
 });
 

@@ -1,6 +1,7 @@
 import cartModel from "../models/cart.model.js";
 import productModel from "../models/products.model.js";
 import ticketController from "./ticketController.js";
+import userModel from "../models/users.model.js";
 
 const getCarts = async (req, res) => {
   const { limit } = req.query;
@@ -41,46 +42,49 @@ const postCart = async (req, res) => {
 
 const purchaseCart = async (req, res) => {
   const { cid } = req.params;
-  const { amount, email } = req.body;
+  const email = req.user.email
   try {
     const cart = await cartModel.findById(cid);
     const products = await productModel.find();
 
-    if (cart) {
-      let amount = 0;
-      const purchaseItems = [];
-
-      for (const item of cart.products) {
-        const product = products.find(
-          (prod) => prod._id == item.id_prod.toString()
-        );
-        if (product.stock >= item.quantity) {
-          amount += product.price * item.quantity;
-          product.stock -= item.quantity;
-          await product.save();
-          purchaseItems.push(product.title);
-        }
-      }
-
-      const generatedTicket = await ticketController.createTicket(req, res);
-
-      console.log(purchaseItems);
-
-      await cartModel.findByIdAndUpdate(cid, { products: [] });
-      res.status(201).send({
-        response: "Compra exitosa",
-        amount: amount,
-        items: purchaseItems,
-        ticket: generatedTicket, // Agrega el ticket a la respuesta
-      });
-    } else {
-      res.status(404).send({ resultado: "Not Found", message: cart });
+    if (!cart) {
+      return res.status(404).send({ resultado: "Not Found", message: cart });
     }
+
+    let totalAmount = 0;
+    const purchaseItems = [];
+
+    for (const item of cart.products) {
+      const product = products.find(
+        (prod) => prod._id == item.id_prod.toString()
+      );
+      if (product.stock >= item.quantity) {
+        totalAmount += product.price * item.quantity;
+        product.stock -= item.quantity;
+        await product.save();
+        purchaseItems.push(product.title);
+      }
+    }
+
+    const generatedTicket = await ticketController.createTicket({
+      body: {
+        amount: totalAmount,
+        email: email
+      },
+    }, res);
+
+    await cartModel.findByIdAndUpdate(cid, { products: [] });
+
+    res.status(201).send({
+      response: "Compra exitosa",
+      amount: totalAmount,
+      items: purchaseItems,
+      ticket: generatedTicket,
+    });
   } catch (error) {
     res.status(400).send({ error: `Error al consultar carrito: ${error}` });
   }
 };
-
 const postProductIntoCart = async (req, res) => {
   const { cid, pid } = req.params;
 
