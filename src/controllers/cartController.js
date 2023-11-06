@@ -85,6 +85,7 @@ const purchaseCart = async (req, res) => {
     res.status(400).send({ error: `Error al consultar carrito: ${error}` });
   }
 };
+
 const postProductIntoCart = async (req, res) => {
   const { cid, pid } = req.params;
 
