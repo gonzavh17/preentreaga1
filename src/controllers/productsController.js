@@ -1,4 +1,5 @@
 import productModel from '../models/products.model.js'
+import { generateProductErrorInfo } from '../services/errors/info.js';
 
 const getProducts = async (req, res) => {
   const { limit, page, sort, category, status } = req.query;
@@ -35,6 +36,20 @@ const getProduct = async (req, res) => {
     res.status(400).send({ error: `Error al consultar productos ${error}` });
   }
 }
+
+const validateProductData = (user) => {
+  const requiredFields = ['title', 'price', 'description', 'category'];
+
+  const missingFields = requiredFields.filter(campo => !(campo in user));
+
+  if (missingFields.length > 0) {
+      throw CustomError.createError({
+          name: EErrors.MISSING_REQUIRED_FIELDS.name,
+          message: generateUserErrorInfo(user),
+          code: EErrors.MISSING_REQUIRED_FIELDS.code,
+      });
+  }
+};
 
 const postProduct = async (req, res) => {
   const { title, description, stock, code, price, category } = req.body;
@@ -94,6 +109,7 @@ const productsController = {
 	postProduct,
 	putProduct,
 	deleteProduct,
+  validateProductData
 }
 
 export default productsController

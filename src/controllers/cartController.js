@@ -42,7 +42,7 @@ const postCart = async (req, res) => {
 
 const purchaseCart = async (req, res) => {
   const { cid } = req.params;
-  const email = req.user.email
+  const email = req.user.email;
   try {
     const cart = await cartModel.findById(cid);
     const products = await productModel.find();
@@ -66,12 +66,15 @@ const purchaseCart = async (req, res) => {
       }
     }
 
-    const generatedTicket = await ticketController.createTicket({
-      body: {
-        amount: totalAmount,
-        email: email
+    const generatedTicket = await ticketController.createTicket(
+      {
+        body: {
+          amount: totalAmount,
+          email: email,
+        },
       },
-    }, res);
+      res
+    );
 
     await cartModel.findByIdAndUpdate(cid, { products: [] });
 

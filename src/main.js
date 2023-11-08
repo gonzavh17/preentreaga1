@@ -13,6 +13,7 @@ import initializePassport from './config/passport.js';
 import routerHbs from "./routes/handlebars.routes.js";
 import router from "./routes/index.routes.js";
 import routerMailing from "./routes/mail.routes.js";
+import errorHandler from "./middlewares/errors/errorHandler.js";
 
 
 const PORT = 8080;
@@ -56,6 +57,7 @@ app.use(session({
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(errorHandler)
 
 //Conexion socket.io
 
@@ -73,6 +75,7 @@ io.on("connection", (socket) => {
     socket.emit("products", products);
   });
 });
+
 
 app.use("/static", express.static(path.join(__dirname, "/public")));
 app.use('/static', routerHbs);
