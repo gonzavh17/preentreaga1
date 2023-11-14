@@ -7,6 +7,7 @@ import messageRouter from "./messages.routes.js";
 import routerMailing from "./mail.routes.js";
 import routerTicket from "./ticket.routes.js";
 import mockingRouter from "./mocking.routes.js";
+import routerLoggerTest from "./loggerTes.routes.js";
 
 const router = Router()
 
@@ -18,5 +19,6 @@ router.use('/api/message', messageRouter)
 router.use('/api/mail', routerMailing)
 router.use('/api/tickets', routerTicket)
 router.use('/api/mocking', mockingRouter)
+router.use('/api/logger', routerLoggerTest)
 
 export default router

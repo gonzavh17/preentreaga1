@@ -1,0 +1,9 @@
+{"level":"fatal","message":"Esto es un logger de fatal","timestamp":"2023-11-14T23:42:15.522Z"}
+{"level":"error","message":"Esto es un logger de error","timestamp":"2023-11-14T23:42:15.523Z"}
+{"level":"warn","message":"Esto es un logger de warn","timestamp":"2023-11-14T23:42:15.523Z"}
+{"level":"fatal","message":"Esto es un logger de fatal","timestamp":"2023-11-14T23:42:17.781Z"}
+{"level":"error","message":"Esto es un logger de error","timestamp":"2023-11-14T23:42:17.782Z"}
+{"level":"warn","message":"Esto es un logger de warn","timestamp":"2023-11-14T23:42:17.782Z"}
+{"level":"fatal","message":"Esto es un logger de fatal","timestamp":"2023-11-14T23:49:06.735Z"}
+{"level":"error","message":"Esto es un logger de error","timestamp":"2023-11-14T23:49:06.737Z"}
+{"level":"warn","message":"Esto es un logger de warn","timestamp":"2023-11-14T23:49:06.737Z"}

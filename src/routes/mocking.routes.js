@@ -3,6 +3,6 @@ import mockingController from "../controllers/mockingController.js";
 
 const mockingRouter = Router()
 
-mockingRouter.post('/products', mockingController.generateRandomProducts)
+mockingRouter.get('/products', mockingController.generateRandomProducts)
 
 export default mockingRouter

@@ -3,6 +3,7 @@ import passport from "passport";
 import 'dotenv/config'
 import { authorization, passportError } from "../utils/messageErrors.js";
 import sessionController from "../controllers/sesionController.js";
+import userController from "../controllers/userController.js";
 
 const routerSession = Router();
 

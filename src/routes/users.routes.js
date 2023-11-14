@@ -4,6 +4,6 @@ import userController from "../controllers/userController.js";
 
 const routerUser = Router();
 
-routerUser.post('/', passport.authenticate('register'), userController.postUser)
+routerUser.post('/',userController.validateUserData, passport.authenticate('register'), userController.postUser)
 
 export default routerUser;

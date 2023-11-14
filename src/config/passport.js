@@ -10,6 +10,8 @@ const LocalStrategy = local.Strategy;
 const JWTStrategy = jwt.Strategy
 const ExtractJWT = jwt.ExtractJwt
 
+import logger from "../utils/loggers.js";
+
 
 
 const initializePassport = () => {
@@ -54,7 +56,7 @@ const initializePassport = () => {
           });
           return done(null, userCreated);
         } catch (error) {
-          return done(error);
+          return logger(error);
         }
       }
     )
@@ -75,7 +77,7 @@ const initializePassport = () => {
           }
           return done(null, false);
         } catch (error) {
-          return done(error);
+          return logger(error);
         }
       }
     )
@@ -107,7 +109,7 @@ const initializePassport = () => {
             done(null, user);
           }
         } catch (error) {
-          done(error);
+          logger(error);
         }
       }
     )

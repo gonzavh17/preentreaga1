@@ -57,7 +57,7 @@ app.use(session({
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(errorHandler)
+
 
 //Conexion socket.io
 
@@ -85,3 +85,5 @@ app.use('/', router)
 app.get("*", (req, res) => {
   res.status(404).send("Error 404");
 });
+
+app.use(errorHandler)

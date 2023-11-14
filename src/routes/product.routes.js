@@ -9,7 +9,7 @@ productRouter.get("/", productsController.getProducts);
 
 productRouter.get("/:pid", productsController.getProduct);
 
-productRouter.post("/", passportError("jwt"), authorization("Admin"), productsController.postProduct);
+productRouter.post("/", productsController.validateProductData , passportError("jwt"), authorization("Admin"), productsController.postProduct);
 
 productRouter.put("/:pid", productsController.putProduct);
 
