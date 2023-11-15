@@ -7,7 +7,7 @@ import userController from "../controllers/userController.js";
 
 const routerSession = Router();
 
-routerSession.post('/register', passport.authenticate('register'), sessionController.register);
+routerSession.post('/register', /* userController.validateUserData */ passport.authenticate('register'), sessionController.register);
 routerSession.post('/login', passport.authenticate('login'), sessionController.login)
 routerSession.get('/current', passportError('jwt'), authorization('user'), sessionController.getCurrentSession)
 routerSession.get('/github', passport.authenticate('github', { scope: ['user:email'] }), sessionController.getGithubCreateUser )
