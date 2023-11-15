@@ -1,4 +1,5 @@
 import productModel from '../models/products.model.js'
+import EErrors from '../services/errors/enums.js';
 
 import { generateProductErrorInfo } from '../services/errors/info.js';
 
@@ -55,23 +56,26 @@ const validateProductData = (req, res, next) => {
   }
 }
 
-const postProduct = async (req, res) => {
-  const { title, description, stock, code, price, category } = req.body;
+export const postProduct = async (req, res) => {
+  const { title, description, price, stock, code, category, status, thumbnail } = req.body;
 
-    try {
+  try {
       const respuesta = await productModel.create({
-        title,
-        description,
-        stock,
-        code,
-        price,
-        category,
-      });
-      res.status(200).send({ resultado: "ok", message: respuesta });
-    } catch (error) {
-      res.status(400).send({ error: `Error al crear producto ${error}` });
-    }
-}
+          title,
+          description,
+          price,
+          thumbnail,
+          code,
+          stock,
+          status,
+          category
+      })
+      res.status(200).send({ resultado: 'OK', message: respuesta });
+  }
+  catch (error) {
+      res.status(400).send({ error: `Error al crear producto: ${error}` });
+  }
+};
 
 const putProduct = async (req, res) => {
   const { pid } = req.params;

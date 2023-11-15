@@ -1,4 +1,5 @@
 import userModel from "../models/users.model.js";
+import EErrors from "../services/errors/enums.js";
 
 const postUser = async(req, res) => {
     try {

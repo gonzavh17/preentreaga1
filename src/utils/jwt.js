@@ -8,16 +8,6 @@ export const generateToken = (user) => {
   return token;
 };
 
-/* console.log(
-  generateToken({
-    _id: "65136ca42ded361d20698038",
-    first_name: "Pedro",
-    last_name: "Perez",
-    email: "pedro@pedro.com",
-    rol: "Admin",
-    age: { $numberInt: "21" },
-  })
-); */
 
 export const authToken = (req, res, next) => {
   const authHeader = req.header.authorization;

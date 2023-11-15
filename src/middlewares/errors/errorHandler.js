@@ -1,12 +1,17 @@
 import EErrors from "../../services/errors/enums.js";
 
-export default (error, req, res, next) => {
-    console.log(error.message);
+const UserErrorMiddleware = (error, req, res, next) => {
     switch (error.code) {
-        case EErrors.MISSING_REQUIRED_FIELDS:
-            res.status(400).send({ status: "error", error: error.name });
+        case EErrors.INVALID_USER_ERROR:
+            res.send({ status: "error", error: error.name })
+            break;
+        case EErrors.INVALID_PRODUCT_ERROR:
+            res.send({ status: "error", error: error.name })
             break;
         default:
-            res.status(500).send({ status: "error", error: "Unhandled error" });
+            res.send({ status: "error", error: "Unhandled error" })
+            break;
     }
 }
+
+export default UserErrorMiddleware;
