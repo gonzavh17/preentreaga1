@@ -1,4 +1,5 @@
 import productModel from '../models/products.model.js'
+
 import { generateProductErrorInfo } from '../services/errors/info.js';
 
 const getProducts = async (req, res) => {
@@ -37,19 +38,22 @@ const getProduct = async (req, res) => {
   }
 }
 
-const validateProductData = (user) => {
-  const requiredFields = ['title', 'price', 'description', 'category'];
-
-  const missingFields = requiredFields.filter(campo => !(campo in user));
-
-  if (missingFields.length > 0) {
-      throw CustomError.createError({
-          name: EErrors.MISSING_REQUIRED_FIELDS.name,
-          message: generateUserErrorInfo(user),
-          code: EErrors.MISSING_REQUIRED_FIELDS.code,
-      });
+const validateProductData = (req, res, next) => {
+  const { title, description, price, stock, code, category } = req.body;
+  try {
+      if (!title || !description || !price || !stock || !code || !category) {
+          CustomError.createError({
+              name: "Product creation error",
+              cause: generateProductErrorInfo({ title, description, price, stock, code, category }),
+              message: "One or more properties were incomplete or not valid.",
+              code: EErrors.INVALID_PRODUCT_ERROR
+          })
+      }
+      next();
+  } catch (error) {
+      next(error);
   }
-};
+}
 
 const postProduct = async (req, res) => {
   const { title, description, stock, code, price, category } = req.body;

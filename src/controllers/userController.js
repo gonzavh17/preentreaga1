@@ -11,20 +11,23 @@ const postUser = async(req, res) => {
     }
 }
 
-const validateUserData = (user) => {
-    const requiredFields = ['email', 'last_name', 'first_name', ];
-  
-    const missingFields = requiredFields.filter(field => !(field in user));
-  
-    if (missingFields.length > 0) {
-        throw CustomError.createError({
-            name: EErrors.MISSING_REQUIRED_FIELDS.name,
-            message: generateUserErrorInfo(user),
-            code: EErrors.MISSING_REQUIRED_FIELDS.code,
-        });
-    }
-  };
 
+ const validateUserData = (req, res, next) => {
+    const { first_name, last_name, email } = req.body;
+    try {
+        if (!last_name || !first_name || !email) {
+            CustomError.createError({
+                name: "User creation error",
+                cause: generateUserErrorInfo({ first_name, last_name, email }),
+                message: "One or more properties were incomplete or not valid.",
+                code: EErrors.INVALID_USER_ERROR
+            });
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+ }
 const userController = {
     postUser,
     validateUserData
