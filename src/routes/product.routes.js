@@ -9,7 +9,22 @@ productRouter.get("/", productsController.getProducts);
 
 productRouter.get("/:pid", productsController.getProduct);
 
-productRouter.post("/", productsController.validateProductData , passportError("jwt"), authorization("Admin"), productsController.postProduct);
+productRouter.post('/', (req, res, next) => {
+    const { title, description, price, stock, code, category } = req.body;
+    try {
+        if (!title || !description || !price || !stock || !code || !category) {
+            CustomError.createError({
+                name: "Product creation error",
+                cause: generateProductErrorInfo({ title, description, price, stock, code, category }),
+                message: "One or more properties were incomplete or not valid.",
+                code: EErrors.INVALID_PRODUCT_ERROR
+            })
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+}, passportError('jwt'), authorization(['admin']), productsController.postProduct);
 
 productRouter.put("/:pid", productsController.putProduct);
 
