@@ -26,6 +26,7 @@ const postUser = async(req, res) => {
         }
         next();
     } catch (error) {
+        console.error("Caught an error during validation:", error);
         next(error);
     }
  }

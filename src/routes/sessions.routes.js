@@ -3,11 +3,10 @@ import passport from "passport";
 import 'dotenv/config'
 import { authorization, passportError } from "../utils/messageErrors.js";
 import sessionController from "../controllers/sesionController.js";
-import userController from "../controllers/userController.js";
 
 const routerSession = Router();
 
-routerSession.post('/register', userController.validateUserData, passport.authenticate('register'), sessionController.register);
+routerSession.post('/register', sessionController.validateUserData, passport.authenticate('register'), sessionController.register);
 
 routerSession.post('/login', passport.authenticate('login'), sessionController.login)
 routerSession.get('/current', passportError('jwt'), authorization(['user']), sessionController.getCurrentSession)

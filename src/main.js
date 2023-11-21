@@ -15,6 +15,7 @@ import router from "./routes/index.routes.js";
 import routerMailing from "./routes/mail.routes.js";
 import errorHandler from "./middlewares/errors/errorHandler.js";
 
+import logger from "./utils/loggers.js";
 
 const PORT = 8080;
 const app = express();
@@ -62,7 +63,7 @@ app.use(passport.session())
 //Conexion socket.io
 
 io.on("connection", (socket) => {
-  console.log("Conexion con socket.io");
+  logger.info('Conexión con Socket.io');
 
   socket.on("load", async () => {
     const products = await productManager.getProducts();

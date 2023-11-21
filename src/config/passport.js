@@ -30,6 +30,7 @@ const initializePassport = () => {
     try{
       return done(null, jwt_payload)
     } catch(error) {
+      logger.error(error)
       return done(error)
     }
   }))
@@ -56,7 +57,8 @@ const initializePassport = () => {
           });
           return done(null, userCreated);
         } catch (error) {
-          return logger(error);
+          logger.error(error)
+          return done(error);
         }
       }
     )
@@ -77,7 +79,8 @@ const initializePassport = () => {
           }
           return done(null, false);
         } catch (error) {
-          return logger(error);
+          logger.error(error)
+          return done(error);
         }
       }
     )
@@ -109,7 +112,8 @@ const initializePassport = () => {
             done(null, user);
           }
         } catch (error) {
-          logger(error);
+          logger.error(error)
+          done(error);
         }
       }
     )

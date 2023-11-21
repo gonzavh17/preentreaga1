@@ -1,5 +1,6 @@
 import productModel from '../models/products.model.js'
 import EErrors from '../services/errors/enums.js';
+import CustomError from '../services/errors/CustomErrors.js';
 
 import { generateProductErrorInfo } from '../services/errors/info.js';
 

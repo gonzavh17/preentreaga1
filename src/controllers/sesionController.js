@@ -1,4 +1,8 @@
 import { generateToken } from "../utils/jwt.js";
+import logger from "../utils/loggers.js";
+import EErrors from "../services/errors/enums.js";
+import CustomError from "../services/errors/CustomErrors.js";
+import { generateUserErrorInfo } from "../services/errors/info.js";
 
 const register = async (req, res) => {
     try {
@@ -19,6 +23,7 @@ const register = async (req, res) => {
         res.status(200).send({ payload: req.user })
     }
     catch (error) {
+        logger.error(`Error al crear usuario: ${error}`);
         res.status(500).send({ mensaje: `Error al registrar usuario ${error}` });
     }
 }
@@ -37,9 +42,30 @@ const login = async(req, res) => {
         }
         res.status(200).send({ payload: req.user })
     } catch (error) {
+        logger.error(`Error al iniciar sesion: ${error}`);
         res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` });
     }
 }
+const validateUserData = (req, res, next) => {
+    console.log("Validating user data");
+    const { first_name, last_name, email } = req.body;
+    try {
+        if (!last_name || !first_name || !email) {
+            const error = CustomError.createError({
+                name: "User creation error",
+                cause: generateUserErrorInfo({ first_name, last_name, email }),
+                message: "One or more properties were incomplete or not valid.",
+                code: EErrors.INVALID_USER_ERROR
+            });
+
+            console.log("Error object:", error);
+            throw error;
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+};
 
 const getCurrentSession = async(req, res) => {
     res.status(200).send(req.user)
@@ -71,6 +97,7 @@ const logout = async(req, res) => {
 
 
 const sessionController = {
+    validateUserData,
     register, 
     login,
     getCurrentSession,
