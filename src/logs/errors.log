@@ -24,3 +24,57 @@
 {"level":"error","message":"Error in POST /api/sessions/register: \n    One or more properties were incomplete or not valid.\n    List of required properties:\n    * first_name: needs to be a String, received Jose\n    * last_name: needs to be a String, received \n    * email: needs to be a String, received Jose@gonzalez.com\n    ","timestamp":"2023-11-21T22:15:51.395Z"}
 {"level":"error","message":"Error in POST /api/sessions/register: \n    One or more properties were incomplete or not valid.\n    List of required properties:\n    * first_name: needs to be a String, received \n    * last_name: needs to be a String, received Gonzalez\n    * email: needs to be a String, received Jose@gonzalez.com\n    ","timestamp":"2023-11-21T22:20:51.604Z"}
 {"level":"error","message":"Error in POST /api/products: \n    One or more properties were incomplete or not valid.\n    List of required properties:\n    * name: needs to be a String, received \n    * description: needs to be a String, received HP Spectre x360, i5, 8GB RAM, 256GB SSD\n    * price: needs to be a Number, received 1500\n    * stock: needs to be a Number, received 10\n    * code: needs to be a String, received HP1234\n    * category: needs to be a String, received Laptop\n    ","timestamp":"2023-11-21T22:22:43.244Z"}
+{"level":"error","message":"Token no encontrado: :token","timestamp":"2023-11-24T01:17:37.966Z"}
+{"level":"error","message":"Token no encontrado: :token","timestamp":"2023-11-24T01:18:20.890Z"}
+{"level":"error","message":"Token no encontrado: :token","timestamp":"2023-11-24T01:19:01.809Z"}
+{"level":"error","message":"Token no encontrado: :1edb2da6d73ba466d2934815b5ee6af9d67ec1e9","timestamp":"2023-11-24T01:19:36.418Z"}
+{"level":"error","message":"Token no encontrado: 1edb2da6d73ba466d2934815b5ee6af9d67ec1e9","timestamp":"2023-11-24T01:45:34.765Z"}
+{"level":"error","message":"Error al modificar contraseña: ReferenceError: UserModel is not defined","timestamp":"2023-11-24T01:46:19.065Z"}
+{"level":"error","message":"Token no encontrado: 6c7de83e6c943227f1c693bab0ad89995dca6ed3","timestamp":"2023-11-24T01:47:34.087Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T01:48:06.634Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T01:48:21.740Z"}
+{"level":"error","message":"Token no encontrado: a65770ef8d5ef1c5762512afdd7fb18b7433531a","timestamp":"2023-11-24T01:51:06.172Z"}
+{"level":"error","message":"Token no encontrado: a65770ef8d5ef1c5762512afdd7fb18b7433531a","timestamp":"2023-11-24T01:51:10.149Z"}
+{"level":"error","message":"Token no encontrado: a65770ef8d5ef1c5762512afdd7fb18b7433531a","timestamp":"2023-11-24T01:52:57.973Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T01:55:10.946Z"}
+{"level":"error","message":"Token no encontrado: 0dbf198ce343f16d7dd359d9b434c112dbbedeea","timestamp":"2023-11-24T01:55:25.012Z"}
+{"level":"error","message":"Token no encontrado: 0dbf198ce343f16d7dd359d9b434c112dbbedeea","timestamp":"2023-11-24T01:58:21.962Z"}
+{"level":"error","message":"Token no encontrado: 0dbf198ce343f16d7dd359d9b434c112dbbedeea","timestamp":"2023-11-24T01:58:22.997Z"}
+{"level":"error","message":"Token no encontrado: 0dbf198ce343f16d7dd359d9b434c112dbbedeea","timestamp":"2023-11-24T01:58:23.942Z"}
+{"level":"error","message":"Token no encontrado: 0dbf198ce343f16d7dd359d9b434c112dbbedeea","timestamp":"2023-11-24T01:58:24.641Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T02:01:14.617Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:01:48.025Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:02:04.217Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:02:18.121Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:02:30.715Z"}
+{"level":"error","message":"Error al actualizar password: ReferenceError: linkData is not defined","timestamp":"2023-11-24T02:02:38.528Z"}
+{"level":"error","message":"Error al modificar contraseña: ReferenceError: email is not defined","timestamp":"2023-11-24T02:02:55.237Z"}
+{"level":"error","message":"Error al actualizar password: ReferenceError: linkData is not defined","timestamp":"2023-11-24T02:03:20.584Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:03:32.853Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:03:33.117Z"}
+{"level":"error","message":"Token no encontrado: 0e07e3d4925dbb65d202cd8b058b90409883908f","timestamp":"2023-11-24T02:07:47.942Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T02:07:53.119Z"}
+{"level":"error","message":"Token no encontrado: 1d1dab28d5b048e2bf4ecf417bef1821532613a3","timestamp":"2023-11-24T02:09:27.005Z"}
+{"level":"error","message":"Token no encontrado: 1d1dab28d5b048e2bf4ecf417bef1821532613a3","timestamp":"2023-11-24T02:09:27.194Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T02:10:09.193Z"}
+{"level":"error","message":"Token no encontrado: e09bfe4805c24cd5f4755f67c7ac75459bd40feb","timestamp":"2023-11-24T02:12:20.370Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T02:12:43.784Z"}
+{"level":"error","message":"Usuario no encontrado: undefined","timestamp":"2023-11-24T02:14:58.560Z"}
+{"level":"error","message":"Token no encontrado: 66e04025474eb26799b3d587ee576e3f3f6326b1","timestamp":"2023-11-24T02:15:31.432Z"}
+{"level":"error","message":"Error al actualizar password: ReferenceError: Cannot access 'email' before initialization","timestamp":"2023-11-24T02:15:31.434Z"}
+{"level":"error","message":"Token no encontrado: 66e04025474eb26799b3d587ee576e3f3f6326b1","timestamp":"2023-11-24T02:15:31.906Z"}
+{"level":"error","message":"Error al actualizar password: ReferenceError: Cannot access 'email' before initialization","timestamp":"2023-11-24T02:15:31.906Z"}
+{"level":"error","message":"undefined: No hallado}","timestamp":"2023-11-24T02:18:53.389Z"}
+{"level":"error","message":"undefined: No hallado}","timestamp":"2023-11-24T02:19:41.794Z"}
+{"level":"error","message":"Usuario no encontrado: gonzaasis17@gmail.com","timestamp":"2023-11-24T02:25:45.602Z"}
+{"level":"error","message":"Usuario no encontrado: gonzaasis17@gmail.com","timestamp":"2023-11-24T02:26:04.643Z"}
+{"level":"error","message":"Usuario no encontrado: gonzaasis17@gmail.com","timestamp":"2023-11-24T02:26:06.464Z"}
+{"level":"error","message":"Usuario no encontrado: gonzaasis17@gmail.com","timestamp":"2023-11-24T02:26:23.023Z"}
+{"level":"error","message":"Usuario no encontrado: gonzaasis17@gmail.com","timestamp":"2023-11-24T02:26:30.904Z"}
+{"level":"error","message":"Error al modificar contraseña: ReferenceError: user is not defined","timestamp":"2023-11-24T02:27:00.892Z"}
+{"level":"error","message":"Error al modificar contraseña: ReferenceError: user is not defined","timestamp":"2023-11-24T02:27:06.402Z"}
+{"level":"error","message":"Token no encontrado: dd679a858533f454b1923b7cecf7a745ab8e07c2","timestamp":"2023-11-24T02:30:03.136Z"}
+{"level":"error","message":"Error al modificar contraseña: ReferenceError: createHash is not defined","timestamp":"2023-11-24T02:30:14.221Z"}
+{"level":"error","message":"Token no encontrado: 8a5380af210d11702db49b16d26d373114da2ea8","timestamp":"2023-11-24T02:30:27.442Z"}
+{"level":"error","message":"Error al modificar contraseña: Error: Digest method not supported","timestamp":"2023-11-24T02:30:35.959Z"}
+{"level":"error","message":"Token no encontrado: 5b26a95556700c89ed3fc6b6c0dd3ea665fc5134","timestamp":"2023-11-24T02:31:46.898Z"}
