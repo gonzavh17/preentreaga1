@@ -14,8 +14,9 @@ import routerHbs from "./routes/handlebars.routes.js";
 import router from "./routes/index.routes.js";
 import routerMailing from "./routes/mail.routes.js";
 import errorHandler from "./middlewares/errors/errorHandler.js";
-
 import logger from "./utils/loggers.js";
+import { specs } from "./config/swagger.js";
+import swaggerUiExpress from 'swagger-ui-express'
 
 const PORT = 8080;
 const app = express();
@@ -58,6 +59,7 @@ app.use(session({
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
+app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 
 //Conexion socket.io

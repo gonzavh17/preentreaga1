@@ -59,7 +59,11 @@ const purchaseCart = async (req, res) => {
         (prod) => prod._id == item.id_prod.toString()
       );
       if (product.stock >= item.quantity) {
-        totalAmount += product.price * item.quantity;
+        if (userModel.role === "premium") {
+          amount += price * quantity * 0.8;
+        } else {
+          amount += price * quantity;
+        }
         product.stock -= item.quantity;
         await product.save();
         purchaseItems.push(product.title);
