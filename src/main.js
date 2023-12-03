@@ -15,7 +15,7 @@ import router from "./routes/index.routes.js";
 import routerMailing from "./routes/mail.routes.js";
 import errorHandler from "./middlewares/errors/errorHandler.js";
 import logger from "./utils/loggers.js";
-import { specs } from "./config/swagger.js";
+import { specs } from "./config/config.js";
 import swaggerUiExpress from 'swagger-ui-express'
 
 const PORT = 8080;
@@ -38,6 +38,7 @@ mongoose
     console.log("Error en conexion con MongoDB Atlas: ", error)
   );
 
+
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -59,7 +60,6 @@ app.use(session({
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
-app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 
 //Conexion socket.io

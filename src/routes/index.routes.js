@@ -8,6 +8,8 @@ import routerMailing from "./mail.routes.js";
 import routerTicket from "./ticket.routes.js";
 import mockingRouter from "./mocking.routes.js";
 import routerLoggerTest from "./loggerTes.routes.js";
+import swaggerUiExpress from 'swagger-ui-express'
+import { specs } from "../config/config.js";
 
 const router = Router()
 
@@ -20,5 +22,6 @@ router.use('/api/mail', routerMailing)
 router.use('/api/tickets', routerTicket)
 router.use('/api/mocking', mockingRouter)
 router.use('/api/logger', routerLoggerTest)
+router.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 export default router

@@ -1,0 +1,278 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Obtener todos los carts
+      tags:
+        - All Carts
+      description: Obtener todos los carts
+      responses:
+        "200":
+          description: Carts obtenidos satisfactoriamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al obtener carts
+        "401":
+          description: User no autorizado"
+        "404":
+          description: carts no encontrados
+    post:
+      summary: Crear un cart nuevo
+      tags:
+        - All Carts
+      description: Crear un cart nuevo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carts"
+      responses:
+        "200":
+          description: cart creado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al crear cart
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+
+  /api/carts/{id}:
+    get:
+      summary: Cart por ID
+      tags:
+        - Carts by ID
+      description: Obtener un cart por id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+      responses:
+        "200":
+          description: cart obtenido satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al consultar cart
+        "401":
+          description: User no autorizado
+        "404":
+          description: cart no encontrado
+    put:
+      summary: Actualizar un cart por id
+      tags:
+        - Carts by ID
+      description: Actualizar un cart por id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carts"
+      responses:
+        "200":
+          description: cart actualizado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al actualizar cart
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+        "404":
+          description: cart no encontrado
+    delete:
+      summary: Eliminar un cart por id
+      tags:
+        - Carts by ID
+      description: Eliminar un cart por id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+      responses:
+        "200":
+          description: cart eliminado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al eliminar cart
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+        "404":
+          description: cart no encontrado
+
+  /api/{cid}/products/{pid}:
+    post:
+      summary: Agregar un producto a un cart
+      tags:
+        - Handle products in cart
+      description: Agregar un producto a un cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: Id del producto
+      responses:
+        "200":
+          description: Producto agregado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al agregar producto
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+        "404":
+          description: cart no encontrado
+    put:
+      summary: Actualizar un producto de un cart
+      tags:
+        - Handle products in cart
+      description: Actualizar un producto de un cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: Id del producto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carts"
+      responses:
+        "200":
+          description: Producto actualizado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al actualizar producto
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+        "404":
+          description: cart no encontrado
+    delete:
+      summary: Eliminar un producto de un cart
+      tags:
+        - Handle products in cart
+      description: Eliminar un producto de un cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: Id del producto
+      responses:
+        "200":
+          description: Producto eliminado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al eliminar producto
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+        "404":
+          description: cart no encontrado
+
+  /api/{cid}/checkout:
+    post:
+      summary: Realizar checkout de un cart
+      tags:
+        - Cart checkout
+      description: Realizar checkout de un cart
+      parameters:
+        - in: path
+          name: cid
+          schema:
+            type: string
+          required: true
+          description: Id del cart
+      responses:
+        "200":
+          description: Checkout realizado satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error al realizar checkout
+        "401":
+          description: User no autorizado
+        "403":
+          description: User no tiene los privilegios necesarios
+        "404":
+          description: cart no encontrado
+
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de MongoDB
+        products:
+          type: array
+          description: Productos agregados al cart
